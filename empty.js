@@ -1,2 +1,0 @@
-var hoge;
-hoge = "javascript";
