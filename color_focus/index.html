@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>データ ビジュアライゼーション：カラーランプのフォーカス</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.11/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+      }
+      #info {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 10px;
+        background-color: #fff;
+        font-family: Segoe UI;
+      }
+      .esriLegendServiceLabel {
+        font-size: 10pt;
+      }
+    </style>
+    <script src="//js.arcgis.com/3.11/"></script>
+    <script>
+      require([
+        "esri/map",
+        "esri/layers/FeatureLayer",
+        "esri/symbols/SimpleFillSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/renderers/SimpleRenderer",
+        "esri/Color",
+        "esri/dijit/Legend",
+        "dojo/domReady!"
+      ], function(Map, FeatureLayer, SimpleFillSymbol, SimpleLineSymbol, SimpleRenderer, Color, Legend) {
+
+        // マップの作成
+        var map = new Map("map", {
+          basemap: "topo",
+          center: [138.37, 34.97],
+          zoom: 12,
+          minZoom: 11
+        });
+        
+        // フィーチャ レイヤの作成（※ご自身のフィーチャ サービスの URL　に書き換えてみてください）
+        var layer = new FeatureLayer("http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Shizuoka_ken_Shigaika_Shigaikachoseikuiki/FeatureServer/0");
+        layer.setOpacity(0.8);
+
+        // シンボルの作成
+        var symbol = new SimpleFillSymbol();
+        var outline = new SimpleLineSymbol();
+        outline.setColor(new Color("#999999"));
+        outline.setWidth(0.5);
+        symbol.setOutline(outline);
+        
+        // シンプル レンダラの作成
+        var renderer = new SimpleRenderer(symbol);
+        // 色情報の適用
+        renderer.setColorInfo({
+          field: "ATTR_10",
+          maxDataValue: 600,
+          minDataValue: 300,
+          colors: [new Color("#fffa00"), new Color("#ffe500"), new Color("#ffba00"), new Color("#ffa500"), new Color("#ff9000"), new Color("#ff6500")]
+        });
+        layer.setRenderer(renderer); // レイヤにレンダラを適用
+
+        map.addLayer(layer); // マップにレイヤを追加
+
+        var legend = new Legend({
+          map: map,
+          layerInfos: [{
+            layer: layer,
+            title: "静岡県 用途指定及び市街化区域・市街化調整区域：容積率（%）"
+          }]
+        }, "legend");
+        legend.startup();
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="info">
+      <div id="legend"></div>
+    </div>
+  </body>
+</html>

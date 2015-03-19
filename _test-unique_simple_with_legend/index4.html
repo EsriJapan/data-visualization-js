@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Data Visualization - Unique Value Renderer with Legend</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+      }
+      #info {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 10px;
+        background-color: #fff;
+      }
+    </style>
+    <script src="//js.arcgis.com/3.10/"></script>
+    <script>
+      require([
+        "esri/map",
+        "esri/layers/FeatureLayer",
+        "esri/renderers/UniqueValueRenderer",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/Color",
+        "esri/dijit/Legend",
+        "esri/tasks/query",
+        "esri/tasks/QueryTask",
+        "esri/tasks/StatisticDefinition",
+        "dojo/_base/array",
+        "dojo/domReady!"
+      ], function(Map, FeatureLayer, UniqueValueRenderer, SimpleMarkerSymbol, Color, Legend,
+        Query, QueryTask, StatisticDefinition, array) {
+        var map = new Map("map", {
+          basemap: "gray",
+          center: [139.9, 35.88],
+          zoom: 13
+        });
+
+        var layerUrl = "http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0";
+        
+        var layer = new FeatureLayer(layerUrl);
+        
+        var symbol = new SimpleMarkerSymbol();
+        symbol.setColor(new Color("#cccccc"));
+        var renderer = new UniqueValueRenderer(symbol, "大分類");
+
+        var query = new Query();
+        var statisticDefinition = new StatisticDefinition();
+        statisticDefinition.statisticType = "count";
+        statisticDefinition.onStatisticField = "大分類";
+        statisticDefinition.outStatisticFieldName = "大分類カテゴリ";
+        query.outStatistics = [statisticDefinition];
+        query.groupByFieldsForStatistics = ["大分類"];
+        var qt = new QueryTask(layerUrl);
+        qt.execute(query, function(evt) {
+          var u = evt.features.length;
+          array.forEach(evt.features, function(f, i) {
+            var symbol = new SimpleMarkerSymbol();
+            symbol.setColor(new Color([Math.round(255*(i/u)),55,Math.round(255*(1-(i/u))),0.85]));
+            renderer.addValue(f.attributes.大分類, symbol);
+          });
+          console.log(evt);
+
+          layer.setRenderer(renderer);
+        
+          map.addLayer(layer);
+          
+          var legend = new Legend({
+            map: map,
+            layerInfos: [{
+              layer: layer
+            }]
+          }, "legend");
+          legend.startup();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="info">
+      <div id="legend"></div>
+    </div>
+  </body>
+</html>
