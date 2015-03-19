@@ -1,10 +1,6 @@
 # data-visualization-js
 
-A collection of samples showing how to use the ArcGIS API for JavaScript to create various visualizations.
-
-To explore these samples, you can:
-* Click any thumbnail below to see a live sample
-* Click the title under a thumbnail to view code
+ArcGIS API for JavaScript を用いてデータ ビジュアライゼーションの手法とそれを実現する機能について紹介していく「JavaScript で始めるデータ ビジュアライゼーション」シリーズにおいて使用しているサンプル コード集です。
 
 ## サンプル
 
@@ -36,35 +32,38 @@ To explore these samples, you can:
 |[![](_images/04_4.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_classed)|||
 |[数値分類](enhance_click)|||
 
-## Resources
+## 使用している製品・プロジェクト
 
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
-* [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
-* [twitter@esri](http://twitter.com/esri)
+* [ESRIジャパン オープンデータポータル](http://data.esrij.com/)
+* [ArcGIS for Developers](https://developers.arcgis.com/en/)
 
-## Issues
+**ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウント作成ガイドは[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**
 
-Find a bug or want to request a new feature?  Please let us know by submitting an issue.
+## 動作環境
 
-## Contributing
+* Chrome
+* Firefox
+* Safari 3+
+* Internet Explorer 7+
 
-Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
+## リソース
 
-## Licensing
-Copyright 2014 Esri
+* [ArcGIS 開発者コミュニティ サイト](https://geonet.esri.com/groups/dev-jp)
+* [ArcGIS API for JavaScript（ESRIジャパン）](http://www.esrij.com/products/arcgis-api-for-javascript/)
+* [リファレンス](https://developers.arcgis.com/javascript/jsapi/)
+* [ArcGIS ブログ](http://blog.esrij.com/arcgisblog/2014/12/javascript-9ab3.html)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## ライセンス
+Copyright 2015 Esri Japan Corporation.
 
-   http://www.apache.org/licenses/LICENSE-2.0
+Apache License Version 2.0（「本ライセンス」）に基づいてライセンスされます。あなたがこのファイルを使用するためには、本ライセンスに従わなければなりません。本ライセンスのコピーは下記の場所から入手できます。
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+> http://www.apache.org/licenses/LICENSE-2.0
 
-A copy of the license is available in the repository's [license.txt](license.txt) file.
+適用される法律または書面での同意によって命じられない限り、本ライセンスに基づいて頒布されるソフトウェアは、明示黙示を問わず、いかなる保証も条件もなしに「現状のまま」頒布されます。本ライセンスでの権利と制限を規定した文言については、本ライセンスを参照してください。
 
-[](Esri Language: JavaScript)​
+ライセンスのコピーは本リポジトリの[ライセンス ファイル](./LICENSE)で利用可能です。
+
+[](EsriJapan Tags: <Data Visualization）>)
+[](EsriJapan Language: <JavaScript>)
