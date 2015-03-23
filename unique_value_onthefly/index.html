@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+		<title>データ ビジュアライゼーション： 個別値分類</title>
+		<link rel="stylesheet" href="//js.arcgis.com/3.11/esri/css/esri.css">
+		<style>
+			html, body, #map {
+				height: 100%;
+				margin: 0;
+			}
+			#info {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				padding: 10px;
+				background-color: #fff;
+			}
+		</style>
+		<script src="//js.arcgis.com/3.11/"></script>
+		<script>
+			require([
+				"esri/map",
+				"esri/layers/FeatureLayer",
+				"esri/renderers/UniqueValueRenderer",
+				"esri/symbols/SimpleMarkerSymbol",
+				"esri/Color",
+				"esri/dijit/Legend",
+				"dojo/domReady!"
+			], function(
+				Map, 
+				FeatureLayer, 
+				UniqueValueRenderer, 
+				SimpleMarkerSymbol, 
+				Color, 
+				Legend
+			) {
+				var map = new Map("map", {
+					basemap: "topo",
+					center: [139.9, 35.86],
+					zoom: 13
+				});
+
+				var layer = new FeatureLayer("http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0", {
+					outFields: ["所在地"] //個別値分類で使用する属性フィールドを記述します
+				});
+
+				//デフォルト シンボルの作成
+				var symbol = new SimpleMarkerSymbol().setColor(new Color([100, 100, 100]));
+				//個別値分類の作成				
+				var renderer = new UniqueValueRenderer(null, function(graphic){
+					//所在地フィールドに「平和台」、「流山」または「南流山」が含まるか検索します
+					if (graphic.attributes['所在地'].indexOf("流山市平和台") !== -1 || graphic.attributes['所在地'].indexOf("流山市流山") !== -1 || graphic.attributes['所在地'].indexOf("流山市南流山") !== -1) {
+						//含まれているフィーチャは「中心部」のカテゴリに分けられます
+						return "中心部";
+					}else {
+						//含まれていないフィーチャは「その他」のカテゴリに分けられます
+						return "その他";
+					};
+				});
+
+				//中心部のシンボルを作成
+				var symbol1 = new SimpleMarkerSymbol().setColor(new Color([255, 0, 0]));
+				//個別値分類に中心部カテゴリとシンボルを設定
+				renderer.addValue("中心部", symbol1);
+				
+				//その他のシンボルを作成
+				var symbol2 = new SimpleMarkerSymbol().setColor(new Color([100, 100, 100]));
+				//個別値分類にその他カテゴリとシンボルを設定
+				renderer.addValue("その他", symbol2);
+				
+				layer.setRenderer(renderer);
+
+				map.addLayer(layer);
+
+				//凡例の作成
+				//次回の記事で詳しくご紹介する予定です				
+				var legend = new Legend({
+					map: map,
+					layerInfos: [{
+						layer: layer,
+						title: "公共施設所在地"
+					}]
+				}, "legend");
+				legend.startup();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="map"></div>
+		<div id="info">
+			<div id="legend"></div>
+		</div>
+	</body>
+</html>

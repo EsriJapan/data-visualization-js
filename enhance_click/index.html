@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>データ ビジュアライゼーション：トリガー</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.11/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+      }
+      #info_legend {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 10px;
+        background-color: #fff;
+      }
+      #info_query {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px;
+        background-color: #fff;
+        max-width: 200px;
+        font: 12px Segoe UI;
+      }
+    </style>
+    <script src="//js.arcgis.com/3.11/"></script>
+    <script>
+      require([
+        "esri/map",
+        "esri/layers/FeatureLayer",
+        "esri/renderers/UniqueValueRenderer",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/Color",
+        "esri/dijit/Legend",
+        "esri/tasks/query",
+        "dojo/domReady!"
+      ], function(Map, FeatureLayer, UniqueValueRenderer, SimpleMarkerSymbol, Color, Legend, Query) {
+        var map = new Map("map", {
+          basemap: "topo",
+          center: [139.9028, 35.8563],
+          zoom: 12
+        });
+        
+        var layer = new FeatureLayer("http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0", {
+          outFields: ["名称", "大分類"],
+          mode: FeatureLayer.MODE_SNAPSHOT
+        });
+        
+        //デフォルト シンボルの作成
+        var symbol = new SimpleMarkerSymbol().setColor(new Color([100, 100, 100]));
+        //個別値分類の作成
+        var renderer = new UniqueValueRenderer(symbol, "大分類");
+        //個別値ごとにシンボルを作成します
+        var symbol1 = new SimpleMarkerSymbol().setColor(new Color([255, 125, 0]));
+        //地図に表示したい個別値とシンボルを設定します
+        renderer.addValue("子育て施設", symbol1);
+        var symbol2 = new SimpleMarkerSymbol().setColor(new Color([0, 100, 0]));
+        renderer.addValue("福祉施設", symbol2);
+        var symbol3 = new SimpleMarkerSymbol().setColor(new Color([0, 0, 255]));
+        renderer.addValue("教育施設", symbol3);
+        
+        layer.setRenderer(renderer);
+        
+        map.addLayer(layer);
+        
+        //凡例ウィジェットの作成
+        var legend = new Legend({
+          map: map,
+          layerInfos: [{
+            layer: layer,
+            title: "千葉県流山市の公共施設",
+            defaultSymbol: false
+          }]
+        }, "legend");
+        legend.startup();
+        
+        var selectedFeatures = [];
+        
+        layer.on("click", function(evt){
+          //前回の検索で選択されたフィーチャのシンボルをデフォルトに戻す
+          for (var i=0; i<selectedFeatures.length; i++) {
+            selectedFeatures[i].setSymbol(layer.renderer.symbol);
+          };
+          selectedFeatures = [];
+        
+          //500mのバッファを作成し、レイヤを検索
+          var query = new Query();
+          query.geometry = evt.graphic.geometry;
+          query.distance = 500;
+          query.units = "meters";
+          
+          //検索の開始
+          layer.queryFeatures(query).then(function(featureSet){
+            var graphics = featureSet.features;
+            var info = " <b>" + evt.graphic.attributes.名称 + "</b>から500m圏内にある公共施設:<hr><ul>";
+            
+            for (var i=0; i<graphics.length; i++) {
+              graphics[i].setSymbol(new SimpleMarkerSymbol());
+              selectedFeatures.push(graphics[i]);
+              if (graphics[i].attributes.名称 === evt.graphic.attributes.名称) {
+                graphics[i].symbol.setColor(new Color("#000"));
+              } else {
+                graphics[i].symbol.setColor(new Color("#ff0"));
+                info += "<li>" + graphics[i].attributes.名称 + "</li>";
+              };
+            };
+            layer.redraw();
+            
+            info += "</ul>";
+            document.getElementById("info_query").innerHTML = info;
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="info_legend">
+      <div id="legend"></div>
+    </div>
+    <div id="info_query">施設のポイントをクリックして、その施設から500m圏内にある公共施設を検索します。</div>
+  </body>
+</html>

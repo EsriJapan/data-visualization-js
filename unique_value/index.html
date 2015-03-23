@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+		<title>データ ビジュアライゼーション： 個別値分類</title>
+		<link rel="stylesheet" href="//js.arcgis.com/3.11/esri/css/esri.css">
+		<style>
+			html, body, #map {
+				height: 100%;
+				margin: 0;
+			}
+		</style>
+		<script src="//js.arcgis.com/3.11/"></script>
+		<script>
+			require([
+				"esri/map",
+				"esri/layers/FeatureLayer",
+				"esri/renderers/UniqueValueRenderer",
+				"esri/symbols/SimpleMarkerSymbol",
+				"esri/Color",
+				"dojo/domReady!"
+			], function(
+				Map, 
+				FeatureLayer, 
+				UniqueValueRenderer, 
+				SimpleMarkerSymbol, 
+				Color
+			) {
+				var map = new Map("map", {
+					basemap: "topo",
+					center: [139.92, 35.87],
+					zoom: 13
+				});
+				
+				var layer = new FeatureLayer("http://services3.arcgis.com/iH4Iz7CEdh5xTJYb/arcgis/rest/services/Nagareyama_shi_Shisetsu_All/FeatureServer/0");
+
+				//デフォルト シンボルの作成			
+				var symbol = new SimpleMarkerSymbol().setColor(new Color([100, 100, 100]));
+				//個別値分類の作成
+				var renderer = new UniqueValueRenderer(symbol, "大分類");
+
+				//個別値ごとにシンボルを作成します
+				var symbol1 = new SimpleMarkerSymbol().setColor(new Color([255, 125, 0]));
+				//地図に表示したい個別値とシンボルを設定します
+				renderer.addValue("子育て施設", symbol1);
+				
+				var symbol2 = new SimpleMarkerSymbol().setColor(new Color([0, 100, 0]));
+				renderer.addValue("福祉施設", symbol2);
+
+				var symbol3 = new SimpleMarkerSymbol().setColor(new Color([0, 0, 255]));
+				renderer.addValue("教育施設", symbol3);
+				
+				layer.setRenderer(renderer);
+				
+				map.addLayer(layer);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="map"></div>
+	</body>
+</html>

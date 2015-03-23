@@ -8,29 +8,35 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 
 |[![](_images/01_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=map)|[![](_images/01_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=basic_add_data)|[![](_images/01_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=basic_use_renderer)|
 |:-:|:-:|:-:|
-|[マップの表示](basic_simple_map)|[データの表示](basic_add_data)|[シンプル レンダラ](basic_use_renderer)|
+|[マップの表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=map)|[データの表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=basic_add_data)|[シンプル レンダラ](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=basic_use_renderer)|
 
 ### 個別値分類編
 
 |[![](_images/02_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value)|[![](_images/02_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_legend)|[![](_images/02_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_onthefly)|
 |:-:|:-:|:-:|
-|[個別値分類](unique_simple)|[個別値分類（凡例付き）](unique_simple_with_legend)|[クライアント側でカテゴリを設定](unique_conversion)|
+|[個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value)|[個別値分類（凡例付き）](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_legend)|[クライアント側でカテゴリを設定](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_onthefly)|
 
 ### 拡張オプション編
 
 |[![](_images/03_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate)|[![](_images/03_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate_function)|[![](_images/03_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_legend)|
 |:-:|:-:|:-:|
-|[属性情報の表示](enhance_infotemplate)|[関数を用いた属性情報の表示](enhance_infotemplate_function)|[凡例の表示](enhance_legend)|
+|[属性情報の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate)|[関数を用いた属性情報の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate_function)|[凡例の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_legend)|
 |[![](_images/03_4.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_click)|||
-|[クリック イベント](enhance_click)|||
+|[クリック イベント](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_click)|||
 
 ### 色表現編
 
 |[![](_images/04_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_simple)|[![](_images/04_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_focus)|[![](_images/04_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_stops)|
 |:-:|:-:|:-:|
-|[色表現](enhance_infotemplate)|[カラーランプのフォーカス](enhance_infotemplate_function)|[カラーランプの基点を作成](enhance_legend)|
+|[色表現](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_simple)|[カラーランプのフォーカス](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_focus)|[カラーランプの基点を作成](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_stops)|
 |[![](_images/04_4.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_classed)|||
-|[数値分類](enhance_click)|||
+|[数値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_classed)|||
+
+### 比例シンボル編
+
+|[![](_images/05_1.png)](http://apps.esrij.com/jsapi-blog/samples/size_sample/index.html)|[![](_images/05_2.png)](http://apps.esrij.com.s3.amazonaws.com/jsapi-blog/samples/size_unique_value/index.html)|[![](_images/05_3.png)]()|
+|:-:|:-:|:-:|
+|[比例シンボル](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_simple)|[比例シンボルで個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_focus)||
 
 ## 使用している製品・プロジェクト
 
