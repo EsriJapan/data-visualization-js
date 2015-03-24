@@ -14,13 +14,13 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 
 |[![](_images/02_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value)|[![](_images/02_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_legend)|[![](_images/02_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_onthefly)|
 |:-:|:-:|:-:|
-|[個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value)|[個別値分類（凡例付き）](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_legend)|[クライアント側でカテゴリを設定](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_onthefly)|
+|[個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value)|[個別値分類（凡例付き）](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_legend)|[カスタム カテゴリ](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=unique_value_onthefly)|
 
 ### 拡張オプション編
 
 |[![](_images/03_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate)|[![](_images/03_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate_function)|[![](_images/03_3.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_legend)|
 |:-:|:-:|:-:|
-|[属性情報の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate)|[関数を用いた属性情報の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate_function)|[凡例の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_legend)|
+|[属性情報の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate)|[属性情報の表示（関数）](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_infotemplate_function)|[凡例の表示](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_legend)|
 |[![](_images/03_4.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_click)|||
 |[クリック イベント](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=enhance_click)|||
 
