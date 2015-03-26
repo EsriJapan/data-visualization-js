@@ -34,9 +34,9 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 
 ### 比例シンボル編
 
-|[![](_images/05_1.png)](http://apps.esrij.com/jsapi-blog/samples/size_sample/index.html)|[![](_images/05_2.png)](http://apps.esrij.com.s3.amazonaws.com/jsapi-blog/samples/size_unique_value/index.html)|[![](_images/05_3.png)]()|
+|[![](_images/05_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[![](_images/05_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)|[![](_images/05_3.png)](#)|
 |:-:|:-:|:-:|
-|[比例シンボル](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_simple)|[比例シンボルで個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=color_focus)||
+|[比例シンボル](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[比例シンボルで個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)||
 
 ## 使用している製品・プロジェクト
 
@@ -55,10 +55,9 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 
 ## リソース
 
-* [ArcGIS 開発者コミュニティ サイト](https://geonet.esri.com/groups/dev-jp)
+* [ArcGIS 開発者コミュニティ](https://geonet.esri.com/groups/devcom-jp)
 * [ArcGIS API for JavaScript（ESRIジャパン）](http://www.esrij.com/products/arcgis-api-for-javascript/)
-* [リファレンス](https://developers.arcgis.com/javascript/jsapi/)
-* [ArcGIS ブログ](http://blog.esrij.com/arcgisblog/2014/12/javascript-9ab3.html)
+* [ArcGIS API for JavaScript リファレンス](https://developers.arcgis.com/javascript/jsapi/)
 
 ## ライセンス
 Copyright 2015 Esri Japan Corporation.
