@@ -1,6 +1,6 @@
 # data-visualization-js
 
-ArcGIS API for JavaScript を用いてデータ ビジュアライゼーションの手法とそれを実現する機能について紹介していく「JavaScript で始めるデータ ビジュアライゼーション」シリーズにおいて使用しているサンプル コード集です。
+ArcGIS API for JavaScript を用いてデータ ビジュアライゼーションの手法とそれを実現する機能について紹介していく「[JavaScript で始めるデータ ビジュアライゼーション](https://geonet.esri.com/docs/DOC-3492)」シリーズにおいて使用しているサンプル コード集です。
 
 ## サンプル
 
