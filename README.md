@@ -1,7 +1,5 @@
 # data-visualization-js
 
-![](thumbnail.png)
-
 ArcGIS API for JavaScript を用いてデータ ビジュアライゼーションの手法とそれを実現する機能について紹介していく「[JavaScript で始めるデータ ビジュアライゼーション](https://geonet.esri.com/docs/DOC-3492)」シリーズにおいて使用しているサンプル コード集です。
 
 ## サンプル
@@ -46,7 +44,7 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 * [ESRIジャパン オープンデータポータル](http://data.esrij.com/)
 * [ArcGIS for Developers](https://developers.arcgis.com/en/)
 
-**ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウント作成ガイドは[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**
+**ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウントは無償で作成することができます。作成方法は[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**
 
 ## 動作環境
 
