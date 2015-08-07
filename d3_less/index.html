@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>JSAPI（D3なし）</title>
+
+    <link rel="stylesheet" href="//js.arcgis.com/3.14/esri/css/jsapi.css"/>
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "Meiryo", 'News Cycle', sans-serif;
+            font-size: 0.90em;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* 数値分類に応じた SVG のスタイリング */
+        path[data-classification="0"] {
+            fill: none;
+            stroke: #0000ff;
+            stroke-width: 10;
+            stroke-opacity: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        path[data-classification="1"] {
+            fill: none;
+            stroke: #5500ff;
+            stroke-width: 15;
+            stroke-opacity: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        path[data-classification="2"] {
+            fill: none;
+            stroke: #ff00ff;
+            stroke-width: 20;
+            stroke-opacity: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        path[data-classification="3"] {
+            fill: none;
+            stroke: #ff0080;
+            stroke-width: 30;
+            stroke-opacity: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        path[data-classification="4"] {
+            fill: none;
+            stroke: #ff0000;
+            stroke-width: 40;
+            stroke-opacity: 0.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* SVG のアニメーション */
+        @keyframes highlight {
+            100% {
+                stroke-width: 150;
+                stroke-opacity: 0.2;
+            }
+        }
+        @-webkit-keyframes highlight {
+            100% {
+                stroke-width: 150;
+                stroke-opacity: 0.2;
+            }
+        }
+        path:hover {
+            cursor: pointer;
+            animation-duration: 0.2s;
+            animation-name: highlight;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            -webkit-animation-duration: 0.2s;
+            -webkit-animation-name: highlight;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-fill-mode: forwards;
+        }
+
+        #legend svg {
+            vertical-align: middle;
+        }
+    </style>
+
+    <script src="//js.arcgis.com/3.14/"></script>
+
+    <script>
+        require([
+            "esri/map",
+            "esri/layers/FeatureLayer",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/symbols/SimpleFillSymbol",
+            "esri/symbols/TextSymbol",
+            "esri/renderers/SimpleRenderer",
+            "esri/layers/LabelLayer",
+            "esri/Color",
+
+            "dojo/_base/array",
+            "dojo/dom",
+            "dojo/number",
+            "dojo/on",
+            "dojo/parser",
+            "dojo/ready"
+        ], function (
+          Map, FeatureLayer,
+          SimpleLineSymbol, SimpleFillSymbol, TextSymbol, SimpleRenderer, LabelLayer, Color,
+          array, dom, number, on, parser, ready
+        ) {
+            parser.parse();
+
+            var map, layer, quantize, labels;
+
+            // 数値分類用オブジェクトの配列
+            var classbreaks = [
+                {
+                    attribute: "0",
+                    value: 4008
+                },
+                {
+                    attribute: "1",
+                    value: 8006
+                },
+                {
+                    attribute: "2",
+                    value: 12004
+                },
+                {
+                    attribute: "3",
+                    value: 16002
+                },
+                {
+                    attribute: "4",
+                    value: 20000
+                }
+            ];
+
+            ready(function () {
+                map = new Map("map", {
+                  basemap: "topo",
+                  center: [140.995, 42.345],
+                  zoom: 13
+                });
+                addData();
+            });
+
+            function addData() {
+                // 避難所レイヤー
+                var hinanjo = new FeatureLayer("http://services.arcgis.com/Jv1EECU3IM4ZRUev/arcgis/rest/services/Muroran_Hinanbasyo/FeatureServer/0", {
+                    id: "hinanjo",
+                    outFields: ["施設名称", "収容人数"],
+                    styling: false
+                });
+
+                // 避難所ラベルの作成
+                var labelField = "施設名称";
+                var hinanjoColor = new Color("#666");
+                var hinanjoLabel = new TextSymbol().setColor(hinanjoColor);
+                hinanjoLabel.setOffset(-35, -9);
+                hinanjoLabel.font.setSize("8pt");
+                hinanjoLabel.font.setFamily("Meiryo");
+                hinanjoLabel.font.setWeight("bold");
+                var hinanjoLabelRenderer = new SimpleRenderer(hinanjoLabel);
+                labels = new LabelLayer({
+                  id: "labels",
+                  visible: false
+                });
+                labels.addFeatureLayer(hinanjo, hinanjoLabelRenderer, "{" + labelField + "}");
+                map.addLayer(labels);
+
+                // 避難所ポイントをホバー時にラベルを表示
+                hinanjo.on("mouse-over", function(evt) {
+                  labels.show();
+                });
+                hinanjo.on("mouse-out", function(evt) {
+                  labels.hide();
+                });
+
+                // 避難所レイヤーのグラフィックが SVG 形式かどうか判別
+                if (hinanjo.surfaceType === "svg") {
+                    // 避難所グラフィック描画時に実行
+                    on(hinanjo, "graphic-draw", function (evt) {
+                        var tableAttr = evt.graphic.attributes["収容人数"];
+                        var category;
+                        if (tableAttr < classbreaks[0].value) {
+                            category = classbreaks[0].attribute;
+                        } else if (tableAttr >= classbreaks[0].value && tableAttr < classbreaks[1].value) {
+                            category = classbreaks[1].attribute;
+                        } else if (tableAttr >= classbreaks[1].value && tableAttr < classbreaks[2].value) {
+                            category = classbreaks[2].attribute;
+                        } else if (tableAttr >= classbreaks[2].value && tableAttr < classbreaks[3].value) {
+                            category = classbreaks[3].attribute;
+                        } else if (tableAttr >= classbreaks[3].value && tableAttr < classbreaks[4].value) {
+                            category = classbreaks[4].attribute;
+                        } else {console.log(tableAttr);}
+                        // カテゴリの値を SVG の data-classification 属性に入力
+                        evt.node.setAttribute("data-classification", category);
+                    });
+                    // 凡例の作成
+                    createLegend();
+                } else {
+                    // SVG 形式ではない場合
+                    alert("お使いのブラウザーは SVG をサポートしていません。\nSVG をサポートしているモダン ブラウザーをお使いください。");
+                    dom.byId("legend").innerHTML = "お使いのブラウザーは SVG をサポートしていません。";
+                }
+                map.addLayer(hinanjo);
+
+                return hinanjo;
+            }
+
+            function createLegend() {
+                // 凡例表示用シンボル（SVG）
+                var swatchTemplate =
+                        '<div>' +
+                                '<svg width="45" height="45" version="1.1" xmlns="http://www.w3.org/2000/svg">' +
+                                '<path d="M 20 20 L 21 20 L 21 21 L 20 21 Z" data-classification="${classification}" />' +
+                                '</svg>' +
+                                '<span>${label}</span>' +
+                                '</div>';
+
+                var html = "", inverted, data, legend = dom.byId("legend");
+
+                // 凡例 UI の作成
+                array.forEach(classbreaks, function (classbreak, i) {
+                    var v0;
+                    if (i === 0) {
+                      v0 = 10;
+                    } else {
+                      v0 = classbreaks[i-1].value;
+                    }
+                    var v1 = classbreaks[i].value;
+                    data = {
+                        label: number.format(v0) + " - " + number.format(v1),
+                        classification: i
+                    };
+                    html += esri.substitute(data, swatchTemplate);
+                });
+                legend.innerHTML = legend.innerHTML + html;
+            }
+        });
+    </script>
+</head>
+
+<body>
+<div id="map">
+
+<!-- 凡例 -->
+<div style="font-family: Lucida Grande,Helvetica,Arial,Verdana,sans-serif; font-size: 14px; position: absolute; right: 30px; top: 20px; z-index: 100; padding: 15px; border: 2px solid #666666; border-radius: 5px; background-color: white;">
+
+    <div id="legend">
+        <div style="padding: 6px; text-align: center;">
+            室蘭市避難所 <br/> 収容人数
+        </div>
+    </div>
+
+</div>
+
+</div>
+</body>
+
+</html>
