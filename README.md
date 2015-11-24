@@ -38,11 +38,11 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 |:-:|:-:|:-:|
 |[比例シンボル](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[比例シンボルで個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)||
 
-### D3 編
+### D3 連携編
 
 |[![](_images/06_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[![](_images/06_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)|[![](_images/06_3.png)](#)|
 |:-:|:-:|:-:|
-|[ArcGIS API for JavaScript + D3](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3)|[ArcGIS API for JavaScript のみ](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3_less)||
+|[D3 連携](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3)|[D3 なし](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3_less)||
 
 ## 使用している製品・プロジェクト
 
