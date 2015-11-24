@@ -38,11 +38,18 @@ ArcGIS API for JavaScript を用いてデータ ビジュアライゼーショ�
 |:-:|:-:|:-:|
 |[比例シンボル](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[比例シンボルで個別値分類](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)||
 
+### D3 編
+
+|[![](_images/06_1.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_sample)|[![](_images/06_2.png)](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=size_unique_value)|[![](_images/06_3.png)](#)|
+|:-:|:-:|:-:|
+|[ArcGIS API for JavaScript + D3](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3)|[ArcGIS API for JavaScript のみ](http://apps.esrij.com/jsapi-blog/sandbox/sandbox.html?sample=d3_less)||
+
 ## 使用している製品・プロジェクト
 
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
 * [ESRIジャパン オープンデータポータル](http://data.esrij.com/)
 * [ArcGIS for Developers](https://developers.arcgis.com/en/)
+* [D3](http://d3js.org/)
 
 **ArcGIS の開発キットを使用して開発を行う場合は ArcGIS Online 開発者アカウント（[ArcGIS for Developers](https://developers.arcgis.com/en/)）が必要です。開発者アカウントは無償で作成することができます。作成方法は[こちら](http://www.esrij.com/cgi-bin/wp/wp-content/uploads/documents/signup-esri-developers.pdf)**
 

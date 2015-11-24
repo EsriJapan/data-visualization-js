@@ -66,13 +66,13 @@
         /* SVG のアニメーション */
         @keyframes highlight {
             100% {
-                stroke-width: 150;
+                stroke-width: 50;
                 stroke-opacity: 0.2;
             }
         }
         @-webkit-keyframes highlight {
             100% {
-                stroke-width: 150;
+                stroke-width: 50;
                 stroke-opacity: 0.2;
             }
         }
@@ -158,7 +158,16 @@
 
                 // 避難所ポイントをホバー時にラベルを表示
                 hinanjo.on("mouse-over", function(evt) {
-                  labels.show();
+                  array.forEach(labels.graphics, function(label) {
+                    labels.show();
+                    if(label.symbol.text === evt.graphic.attributes["施設名称"]) {
+                      console.log(label.symbol.text, evt.graphic.attributes["施設名称"]);
+                      label.show();
+                    }
+                    else {
+                      label.hide();
+                    }
+                  });
                 });
                 hinanjo.on("mouse-out", function(evt) {
                   labels.hide();
